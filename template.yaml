@@ -1,0 +1,40 @@
+
+Profil: eleve
+Options: -FollowSymLinks +SymLinksIfOwnerMatch
+HostnameLookups: On
+AllowOverride: all
+EnableMMAP: On
+EnableSendfile: Off
+Modules:
+  mpm: event
+  mod_cache: True
+  mod_reqtimeout: True
+  mod_atomic: False
+  mod_deflate: True
+MPM_Modules:
+  StartServers: 4
+  MinSpareThreads: 25
+  MaxSpareThreads: 75
+  ThreadLimit: 64
+  ThreadsPerChild: 25
+  MaxConnectionsPerChild: 10000
+  MaxRequestWorkers: 800
+  ServerLimit: 32
+KeepAlive:
+  enabled: On
+  timeout: 5
+  max_requests: 150
+Server:
+  ServerSignature: Off
+  ServerTokens: Prod
+  Timeout: 60
+  TraceEnable: Off
+Security:
+  SSLProtocol: all -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+  SSLCipherSuite: HIGH:3DES:!aNULL:!MD5:!SEED:!IDEA
+  SSLHonorCipherOrder: on
+  StrictTransportSecurity: Header always set Strict-Transport-Security max-age=15552000; includeSubDomains
+  expose_php: Off
+Rules: 
+  XFrameOptions: Header always set X-Frame-Options DENY
+  XContentTypeOptions: Header always set X-Content-Type-Options nosniff
